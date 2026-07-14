@@ -4,6 +4,13 @@ const statusDataTitulo = document.getElementById('status-data-titulo');
 const statusConteudo = document.getElementById('status-conteudo');
 const btnAnterior = document.getElementById('btn-anterior');
 const btnProximo = document.getElementById('btn-proximo');
+const btnCriar = document.getElementById('btn-criar');
+const btnHorarios = document.getElementById('btn-horarios');
+const btnEditar = document.getElementById('btn-editar');
+const listasContainer = document.getElementById('listas-container');
+
+let contadorListas = 1;
+let modoExclusaoAtivo = false;
 
 const feriadosNacionais = {
     "1-1": "Ano Novo",
@@ -24,6 +31,64 @@ const feriadosNacionais = {
         "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
         "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
     ];
+
+
+function criarListaTarefas() {
+    const novoQuadro = document.createElement('div');
+    novoQuadro.className = 'quadro-tarefas';
+    novoQuadro.id = `lista-${contadorListas}`;
+
+    novoQuadro.innerHTML = `
+    <h4 class="quadro-titulo">nome da lista${contadorListas}</h4>
+    <div class="quadro-corpo">
+        <div class="tarefa-linha">
+            <span class="tarefa-texto">
+                <span class="tarefa-nome">Tarefa Exemplo</span>
+            </span>
+       
+            <div>
+                <span style="font-size: 0.7rem; display:block;">prioridade</span>
+                <select style="border: 2px solid #000; border-radius: 4px;">
+                    <option></option>
+                </select>
+            </div>
+
+            <div>
+                <span style="font-size: 0.7rem; display:block;">status</span>
+                <select style="border: 2px solid #000; border-radius: 4px;">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="quadro-rodape">
+            <span class="icon-rodape" title="Adicionar tarefa">+</span>
+            <span class="icon-rodape" title="Editar">🖌️</span>
+            <span class="icon-rodape" title="Excluir">🗑️</span>
+    </div>
+    
+    `
+    listasContainer.appendChild(novoQuadro);
+    contadorListas++;
+
+    const lixeira = novoQuadro.querySelector('.icon-rodape[title="Excluir"]');
+    lixeira.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (confirm('Tem certeza que deseja excluir esta lista?')) {
+            novoQuadro.remove();
+        }
+    });
+}
+
+function atualizarRelogio(){
+    const relogioObjeto = document.getElementById('relogio-digital');
+    const agora = new Date();
+    const horas = String(agora.getHours()).padStart(2, '0');
+    const minutos = String(agora.getMinutes()).padStart(2, '0');
+    const segundos = String(agora.getSeconds()).padStart(2, '0');
+    relogioObjeto.textContent = `${horas}:${minutos}:${segundos}`;
+}
 
 function gerarCalendario() {
    
@@ -107,5 +172,13 @@ btnProximo.addEventListener('click', () => {
     }
     gerarCalendario();
 });
+
+btnCriar.addEventListener('click', () => {
+    criarListaTarefas();
+});
+
+
+atualizarRelogio();
+setInterval(atualizarRelogio, 1000);
 
 gerarCalendario();

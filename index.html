@@ -8,6 +8,7 @@
     
 </head>
 <body>
+<div class = "app-container">
 <div class = "sidebar-esquerda">
 
     <div class ="calendario-container">
@@ -20,13 +21,34 @@
             <div>D</div><div>S</div><div>T</div><div>Q</div><div>Q</div><div>S</div><div>S</div>
         </div>
         <div class="calendario-grid" id="dias-grid"></div>
-</div>
-<div class="status-dia-container" id="status-dia-box">
-            <h4 id="status-data-titulo">...</h4>
+    </div>
+    <div class="status-dia-container" id="status-dia-box">
+            <h4 id="status-data-titulo">Selecione um dia para ver os detalhes</h4>
 
             <div id="status-conteudo">
-                <p class="status-vazio"></p>
+                <p class="status-vazio">Nenhum dia selecionado.</p>
+            
+            </div>
+    </div>
+    <div class="relogio-container">
+        <div id="relogio-digital">00:00:00</div>
+    </div>
+    </div>
+<div class = "sidebar-direita">
+    
+    <div class="botoes-controle">
+        <button id="btn-criar" class="btn-pilula">Criar</button>
+        <button id="btn-horarios" class="btn-pilula">Horários</button>
+        <button id="btn-editar" class="btn-pilula">Editar</button>
+    </div>
+
+    <div class="lista-tarefas-container" id="listas-container">
+
+    </div>
+
+    </div>
 </div>
+
 
  
 <script src="script.js"></script>   
